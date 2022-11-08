@@ -1,7 +1,10 @@
 import { Heading } from "../components";
+import styles from '../styles/Home.module.scss';
 
 const Home = () => (
-  <Heading>Hello World</Heading>
+  <div className={styles.wrapper}>
+    <Heading>Hello World</Heading>
+  </div>
 );
 
 
