@@ -1,6 +1,8 @@
+import styles from './styles.module.scss';
+
 const Footer = () => (
-  <footer>
-    <div>Footer component</div>
+  <footer className={styles.footer}>
+    <div>created by @DM</div>
   </footer>
 );
 

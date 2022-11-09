@@ -3,6 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Ubuntu", sans-serif;
+  font-size: 16px;
 }
 
 a {
@@ -10,6 +11,10 @@ a {
   text-decoration: none;
 }
 
+ul,
+ol {
+  list-style-type: none;
+}
 * {
   box-sizing: border-box;
 }
@@ -20,6 +25,6 @@ a {
   }
   body {
     color: white;
-    background: black;
+    background: rgb(9, 9, 9);
   }
 }
