@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
@@ -12,7 +13,9 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbar}>
-      <span className={styles.logo}>Next.js</span>
+      <span className={styles.logo}>
+        <Image src='/favicon.ico' alt="logo" width={40} height={40} />
+      </span>
       <nav className={styles.links}>
         {navigation.map(({ id, path, title }) =>
           <Link
