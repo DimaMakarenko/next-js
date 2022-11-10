@@ -1,18 +1,14 @@
 import Head from "next/head";
 import { Heading } from "../../components";
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import Link from "next/link";
+import { Contacts } from "../../entities/contact";
 
-type Contact = {
-  id: number;
-  name: string;
-  email: string;
-}
-
-export const getStaticProps: GetStaticProps<{ contacts: Contact[] }> = async () => {
+export const getStaticProps: GetStaticProps<{ contacts: Contacts }> = async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/users');
-  const data: Contact[] = await response.json();
+  const data: Contacts = await response.json();
 
-  if (!data) { 
+  if (!data) {
     return {
       notFound: true
     }
@@ -23,7 +19,6 @@ export const getStaticProps: GetStaticProps<{ contacts: Contact[] }> = async () 
       contacts: data
     }
   }
-
 }
 
 const Contacts = ({ contacts }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -36,9 +31,12 @@ const Contacts = ({ contacts }: InferGetStaticPropsType<typeof getStaticProps>) 
       <ul>
         {contacts.map(({ id, name, email }) =>
           <li key={id}>
-            <strong>
-              {name}
-            </strong> -
+            <Link href={`/contacts/${id}`}>
+              <strong>
+                {name}
+              </strong>
+            </Link>
+            -
             ({email})
           </li>)}
       </ul>

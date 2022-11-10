@@ -9,7 +9,7 @@ const navigation = [
   { id: 3, title: 'Contacts', path: '/contacts' },
 ]
 const Navbar = () => {
-  const { pathname } = useRouter();
+  const { pathname, ...other } = useRouter();
 
   return (
     <div className={styles.navbar}>
