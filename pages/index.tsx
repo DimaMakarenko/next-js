@@ -4,19 +4,28 @@ import Head from "next/head";
 import { Socials as SocialsType } from "../entities/social";
 import { GetStaticProps, InferGetStaticPropsType } from "next/types";
 
-export const getStaticProps: GetStaticProps<{ socials: SocialsType }> = async () => {
-  const response = await fetch(`${process.env.API_HOST}/socials/`);
-  const data: SocialsType = await response.json();
+export const getStaticProps: GetStaticProps<{ socials: SocialsType | null }> = async () => {
+  try {
+    const response = await fetch(`${process.env.API_HOST}/socials/`);
+    const data: SocialsType = await response.json();
 
-  if (!data) {
+    if (!data) {
+      return {
+        notFound: true
+      }
+    }
+
     return {
-      notFound: true
+      props: {
+        socials: data
+      }
     }
   }
-
-  return {
-    props: {
-      socials: data
+  catch {
+    return {
+      props: {
+        socials: null
+      }
     }
   }
 }
@@ -27,10 +36,7 @@ const Home = ({ socials }: InferGetStaticPropsType<typeof getStaticProps>) => (
       <title>Home</title>
     </Head>
     <Heading>Hello World</Heading>
-
-    <div>
-      <Socials socials={socials} />
-    </div>
+    {socials && <Socials socials={socials} />}
   </div>
 );
 
